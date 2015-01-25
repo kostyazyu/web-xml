@@ -2,11 +2,11 @@ package com.kostyazyu.service.entities;
 
 import javax.xml.bind.annotation.*;
 import java.util.List;
-import com.kostyazyu.service.entities.*;
 
 @XmlRootElement(name = "customer")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Customer {
+
     private int id;
     private String name;
     @XmlElementWrapper(name = "orders")

@@ -3,11 +3,11 @@ package com.kostyazyu.service.entities;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
-import com.kostyazyu.service.entities.*;
 
 @XmlRootElement(name = "position")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Position {
+
     private int id;
     private double price;
     private int count;

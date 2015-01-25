@@ -1,10 +1,9 @@
 package com.kostyazyu.controller;
 
 import com.kostyazyu.model.MyFile;
-import com.kostyazyu.service.ParsingService;
+import com.kostyazyu.service.CustomerService;
+import com.kostyazyu.utils.MyUtils;
 import com.kostyazyu.validator.FileValidator;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -12,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
@@ -40,27 +40,28 @@ public class FileController {
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
-    public String upload(Model model, @Validated MyFile myFile, BindingResult result) throws IOException {
+    public String upload(Model model, @ModelAttribute("myFile") @Validated MyFile myFile, BindingResult result) throws IOException {
 
         String returnVal = PARSED;
         if (result.hasErrors()) {
-            model.addAttribute("file",result);
             returnVal = INDEX;
         } else {
-            MultipartFile multipartFile = myFile.getFile();
-            String originalFilename = multipartFile.getOriginalFilename();
+            MultipartFile multipartFile = myFile.getMyFile();
+            File file = MyUtils.multipartToFile(multipartFile);
 
-            File file = new File(originalFilename);
-            multipartFile.transferTo(file);
-            ParsingService service = new ParsingService(file);
+            CustomerService service = new CustomerService(file);
 
-            model.addAttribute("all_order_sum", service.getAllOrdersSum());
-            model.addAttribute("max_customer",  service.getMaxSumCustomer().getName());
-            model.addAttribute("max_order_sum", service.getMaxOrderSum());
-            model.addAttribute("min_order_sum", service.getMinOrderSum());
-            model.addAttribute("orders_count", service.getOrdersCount());
-            model.addAttribute("avg_order_sum", service.getAvgOrderSum());
-            model.addAttribute("file_name", originalFilename);
+            model.addAttribute("allOrderSum", service.getAllOrdersSum());
+            model.addAttribute("maxSumCustomer",  service.getMaxSumCustomer().getName());
+            model.addAttribute("maxOrderSum", service.getMaxOrderSum());
+            model.addAttribute("minOrderSum", service.getMinOrderSum());
+            model.addAttribute("ordersCount", service.getOrdersCount());
+            model.addAttribute("avgOrderSum", service.getAvgOrderSum());
+            model.addAttribute("fileName", file.getName());
+            model.addAttribute("customersWithOrderSumGraterThan",
+                    service.getCustomersWithOrderSumGraterThan(myFile.getSum()));
+            model.addAttribute("maxOrderSumRequested", myFile.getSum());
+
         }
         return returnVal;
     }
