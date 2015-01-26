@@ -1,0 +1,52 @@
+
+h1{
+    font-size: 22px;
+}
+.file-name{
+    color:#d5ec5e;
+}
+.wrap{
+    width: 720px;
+    min-height:400px;
+    margin: 0 auto;
+    background: #00639e;
+    border-radius:5px;
+    padding: 10px;
+    color: white;
+}
+
+.table{
+    display:table;
+    width:100%;
+}
+.table-row{
+    display:table-row;
+}
+.table-header{
+    font-weight:bold;
+}
+.header-cell{
+    display:table-cell;
+    padding:5px;
+    border-bottom:2px solid white;
+    vertical-align:bottom;
+}
+.table-cell{
+    display:table-cell;
+    padding:5px;
+    border-bottom:1px solid white;
+}
+.cell-1{
+    width:65%;
+    padding-left:10px;
+}
+.cell-2{
+    width:35%;
+    text-align:center;
+}
+ul{
+    list-style: none;
+    margin:10px 0 10px -30px;
+    font-style: italic;
+}
+

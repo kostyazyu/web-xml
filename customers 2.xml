@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<customers>
+    <customer>
+        <id>100001</id>
+        <name>Игорь Владимирович</name>
+            <order>
+                <id>200001</id>
+                <positions>
+                    <position>
+                        <id>300001</id>
+                        <price>20.0</price>
+                        <count>2</count>
+                    </position>
+                    <position>
+                        <id>300002</id>
+                        <price>250.0</price>
+                        <count>1</count>
+                    </position>
+                </positions>
+            </order>
+            <order>
+                <id>200002</id>
+                <positions>
+                    <position>
+                        <id>300003</id>
+                        <price>15.0</price>
+                        <count>4</count>
+                    </position>
+                </positions>
+            </order>
+        </orders>
+    </customer>
+    <customer>
+        <id>100002</id>
+        <name>Jane Smith</name>
+        <orders>
+            <order>
+                <id>200003</id>
+                <positions>
+                    <position>
+                        <id>300004</id>
+                        <price>50</price>
+                        <count>2</count>
+                    </position>
+                    <position>
+                        <id>300005</id>
+                        <price>110.0</price>
+                        <count>2</count>
+                    </position>
+                </positions>
+            </order>
+        </orders>
+    </customer>
+</customers>
